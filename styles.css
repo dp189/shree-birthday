@@ -54,7 +54,7 @@ body {
 .cake-image {
     width: 250px;
     height: 350px;
-    background-image: url('../assets/cake.png');
+    background-image: url('/cake.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
