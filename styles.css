@@ -1,0 +1,269 @@
+
+
+:root {
+    --soft-pink: #FFC0CB;
+    --lavender: #E6E6FA;
+    --rose-red: #FF007F;
+    --baby-blue: #89CFF0;
+    --pastel-purple: #D8BFD8;
+    --warm-beige: #F5E6CA;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    background: linear-gradient(135deg, var(--soft-pink), var(--lavender));
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.card-container {
+    perspective: 2000px;
+    width: 90%;
+    max-width: 1000px;
+    
+    z-index: 10; /* Ensure this is higher than emoji z-index */
+    position: relative;
+}
+
+.closed-card {
+    width: 100%;
+    height: 500px;
+    background: linear-gradient(135deg, var(--rose-red), var(--pastel-purple));
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all 1s ease;
+    position: relative;
+    z-index: 11;
+}
+
+.cake-image {
+    width: 250px;
+    height: 350px;
+    background-image: url('../assets/cake.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 30px;
+}
+
+.click-to-open {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: pulse 2s infinite;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.open-card {
+    display: none;
+    width: 100%;
+    height: 500px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    transform-style: preserve-3d;
+    position: relative;
+    z-index:11;
+}
+
+.card-left {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+}
+
+.card-right {
+    width: 50%;
+    height: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.carousel-item.active {
+    opacity: 1;
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--rose-red);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-family: 'Raleway', sans-serif;
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.message {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.signature {
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
+    color: var(--rose-red);
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    align-self: flex-end;
+}
+
+.card-open {
+    transform: rotateY(180deg);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.card-reveal {
+    display: flex;
+    animation: cardReveal 1s forwards;
+}
+
+@keyframes cardReveal {
+    0% { transform: rotateY(-180deg); opacity: 0; }
+    100% { transform: rotateY(0deg); opacity: 1; }
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+@media (max-width: 768px) {
+    .closed-card, .open-card {
+        height: 400px;
+    }
+    .open-card {
+        flex-direction: column;
+    }
+    .card-left, .card-right {
+        width: 100%;
+        height: 50%;
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .closed-card, .open-card {
+        height: 350px;
+    }
+    .cake-image {
+        width: 150px;
+        height: 150px;
+    }
+    .click-to-open {
+        font-size: 1.2rem;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    .message {
+        font-size: 0.9rem;
+    }
+}
+
+
+/* Custom scrollbar */
+.message::-webkit-scrollbar {
+    width: 4px;
+}
+
+.message::-webkit-scrollbar-track {
+    background: rgba(255, 192, 203, 0.1);
+    border-radius: 10px;
+}
+
+.message::-webkit-scrollbar-thumb {
+    background: var(--rose-red);
+    border-radius: 10px;
+}
+
+.message::-webkit-scrollbar-thumb:hover {
+    background: #f697c77e;
+}
+
+/* For Firefox */
+.message {
+    scrollbar-width: thin;
+    scrollbar-color: var(--rose-red) rgba(255, 192, 203, 0.1);
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg) scale(1); }
+    50% { transform: translateY(-15px) rotate(5deg) scale(1.05); }
+    100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+
+.carousel-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.carousel-item.active {
+    opacity: 1;
+}
+
+.photo-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
